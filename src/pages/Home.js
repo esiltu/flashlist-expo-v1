@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { StyleSheet, Text, View, Image } from "react-native";
+import { StyleSheet, Text, View, Image, SafeAreaView } from "react-native";
 import { FlashList } from "@shopify/flash-list";
 import getProducts from "../api/GetProducts";
 
@@ -16,22 +16,24 @@ const HomeScreen = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <FlashList
         data={products}
         renderItem={({ item }) => (
           <View style={styles.productContainer}>
             <Image source={{ uri: item.image }} style={styles.image} />
-            <Text style={styles.title}>{item.title}</Text>
-            <Text>Price: ${item.price}</Text>
-            <Text>Category: {item.category}</Text>
-            <Text>Description: {item.description}</Text>
+            <View style={styles.textContainer}>
+              <Text style={styles.title}>{item.title}</Text>
+              <Text style={styles.price}>Price: ${item.price}</Text>
+              <Text style={styles.category}>Category: {item.category}</Text>
+              <Text style={styles.description}>{item.description}</Text>
+            </View>
           </View>
         )}
         keyExtractor={(item) => item.id.toString()}
-        estimatedItemSize={150} // Adjust based on your actual item size
+        estimatedItemSize={300} // Increased size due to additional content and styling
       />
-    </View>
+    </SafeAreaView>
   );
 };
 
@@ -40,18 +42,47 @@ export default HomeScreen;
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    paddingTop: 20,
+    backgroundColor: "#f0f0f0", // Light grey background
   },
   productContainer: {
+    flexDirection: "row",
+    backgroundColor: "#ffffff", // White background for each product
+    marginHorizontal: 10,
+    marginTop: 10,
     padding: 10,
-    borderBottomWidth: 1,
-    borderBottomColor: "#ccc",
+    borderRadius: 10,
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.1,
+    shadowRadius: 2,
+    elevation: 3,
   },
   image: {
-    width: 100,
-    height: 100,
+    width: 120,
+    height: 120,
+    borderRadius: 10, // Rounded corners for the image
+    marginRight: 10,
+  },
+  textContainer: {
+    flex: 1,
+    justifyContent: "space-between",
   },
   title: {
     fontWeight: "bold",
+    fontSize: 18,
+    marginBottom: 2,
+  },
+  price: {
+    fontSize: 16,
+    fontWeight: "600",
+    color: "#007BFF", // Blue color for price
+  },
+  category: {
+    fontSize: 14,
+    color: "#606060", // Grey color for category
+  },
+  description: {
+    fontSize: 12,
+    color: "#404040", // Darker text for description
   },
 });
