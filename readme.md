@@ -4,10 +4,10 @@ Welcome to the flashlist-expo-v1, a streamlined React Native project using Expo,
 
 ## Features
 
-✅ Smooth product listings with FlashList
-✅ Efficient API calls using Axios
-✅ Simple React Navigation setup
-✅ Dynamic data from Fake Store API
+* ✅ Smooth product listings with FlashList
+* ✅ Efficient API calls using Axios
+* ✅ Simple React Navigation setup
+* ✅ Dynamic data from Fake Store API
 
 ### Upcoming Features
 
